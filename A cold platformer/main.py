@@ -11,7 +11,7 @@ from os import path
 import sys
 from random import randint, choice
 import enemies, math, music, menu
-from constants import running, width, height, time, lives, distance, temp_distance, last_press
+from constants import running, width, height, time, lives, distance, temp_dist, last_press
 from abc import ABC, abstractmethod
 
 ################ INITIALIZE PYGAME ###################
@@ -55,10 +55,10 @@ class Player(BasicRect):
         # move the player:
         # left
         if key[K_LEFT] or key[K_a]:
-            self.rect.move_ip(-temp_distance, 0)
+            self.rect.move_ip(-distance, 0)
         # right
         if key[K_RIGHT] or key[K_d]:
-            self.rect.move_ip(temp_distance, 0)
+            self.rect.move_ip(distance, 0)
         # jump
         if key[K_SPACE] or key[K_w]:
             cooldown = 400
@@ -68,6 +68,8 @@ class Player(BasicRect):
             if now - last_press >= cooldown:
                 self.rect.move_ip(0, -distance*7)
                 last_press = now
+            self.start_time = pygame.time.get_ticks()
+
         # run
         if key[K_LSHIFT]:
             temp_distance = distance * 3
