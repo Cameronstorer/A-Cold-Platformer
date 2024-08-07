@@ -99,8 +99,8 @@ class CreateObjects():
         self.tracker = Tracker()
 
         # create platform objects
-        self.coordinates =  [(0,460),  (0,0),   (500, 0),   (0, 350)]
-        self.size =         [(500,40), (40,500),  (40,500), (500, 40)]
+        self.coordinates =  [(0,460),  (0,0),     (500, 0),   (0, 350)]
+        self.size =         [(500,40), (40,500),  (40,500),   (500, 40)]
 
         for i in range(len(self.coordinates)):
             platform = Platform((self.coordinates[i][0], self.coordinates[i][1]),
