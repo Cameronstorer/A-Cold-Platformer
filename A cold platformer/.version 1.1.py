@@ -162,15 +162,15 @@ def collisions():
                 platform.rect.x += 2
                 global move_left
                 move_left = False
-            else:
-                move_left = True
+            #else:
+               # move_left = True
 
             if objects.player.rect.right == platform.rect.left:
                 platform.rect.x -= 3
                 global move_right
                 move_right = False
-            else:
-                move_right = True
+           # else:
+              #  move_right = True
             
 
 def gravity():
