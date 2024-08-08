@@ -33,7 +33,6 @@ jumping = False
 runspeed = 2
 fallspeed = 4
 jumpspeed = 12
-move_left = move_right = True
 
 ################ INITIALIZE PYGAME ###################
 
@@ -62,7 +61,9 @@ class BasicRect(ABC):
 
     # blit the player on the screen
     def blit(self):
-        window.blit(self.surface, (self.rect.x, self.rect.y))
+        window.blit(self.surface, self.rect)
+        # lets look at our collision detection
+        pygame.draw.rect(window, (255, 255, 255), self.rect, 2) # the 2 is border thickness (helpful for collision detection)
 
 # player class
 class Player(BasicRect):
@@ -124,13 +125,11 @@ def handle_keys():
     for platform in platforms:
         # left
         if key[K_LEFT] or key[K_a]:
-            if move_left:
-                platform.rect.x += temp_distance
+            platform.rect.x += temp_distance
 
         # right
         if key[K_RIGHT] or key[K_d]:
-            if move_right:
-                platform.rect.x -= temp_distance
+            platform.rect.x -= temp_distance
 
     # jump
     if key[K_SPACE] or key[K_w] or key[K_UP]:
@@ -155,24 +154,20 @@ def handle_keys():
         temp_distance = distance
 
 def collisions():
+
+
+
+
     if objects.player.rect.collidelist(platforms) != -1:
         for platform in platforms:
 
             if objects.player.rect.left == platform.rect.right:
                 platform.rect.x += 2
-                global move_left
-                move_left = False
-            else:
-                move_left = True
 
-            if objects.player.rect.right == platform.rect.left:
+
+            elif objects.player.rect.right == platform.rect.left:
                 platform.rect.x -= 3
-                global move_right
-                move_right = False
-            else:
-                move_right = True
             
-
 def gravity():
     if objects.player.rect.collidelist(platforms) == -1:
         objects.player.rect.y += fallspeed
