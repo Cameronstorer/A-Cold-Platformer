@@ -34,7 +34,6 @@ class BasicRect(ABC):
         self.y = coordinates[1]
         self.width = size[0]
         self.height = size[1]
-        pygame.
         self.rect = pygame.rect.Rect(coordinates, size)
         self.surface = pygame.Surface(size)
 
